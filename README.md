@@ -63,11 +63,11 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [x] Commit: `Implement unsubscribe function in Notification controller.`
     -   [x] Write answers of your learning module's "Reflection Publisher-2" questions in this README.
 -   **STAGE 3: Implement notification mechanism**
-    -   [ ] Commit: `Implement update method in Subscriber model to send notification HTTP requests.`
-    -   [ ] Commit: `Implement notify function in Notification service to notify each Subscriber.`
-    -   [ ] Commit: `Implement publish function in Program service and Program controller.`
-    -   [ ] Commit: `Edit Product service methods to call notify after create/delete.`
-    -   [ ] Write answers of your learning module's "Reflection Publisher-3" questions in this README.
+    -   [x] Commit: `Implement update method in Subscriber model to send notification HTTP requests.`
+    -   [x] Commit: `Implement notify function in Notification service to notify each Subscriber.`
+    -   [x] Commit: `Implement publish function in Program service and Program controller.`
+    -   [x] Commit: `Edit Product service methods to call notify after create/delete.`
+    -   [x] Write answers of your learning module's "Reflection Publisher-3" questions in this README.
 
 ## Your Reflections
 This is the place for you to write reflections:
@@ -99,4 +99,20 @@ Jika kita hanya menggunakan Model tanpa memisahkan Service dan Repository, semua
 > Have you explored more about Postman? Tell us how this tool helps you to test your current work. You might want to also list which features in Postman you are interested in or feel like it is helpful to help your Group Project or any of your future software engineering projects.
 
 Menurut saya, Postman adalah alat yang sangat berguna untuk menguji REST API. Dalam proyek ini, Postman membantu saya memastikan fungsi subscription dan unsubscription berjalan dengan baik tanpa perlu membuat antarmuka frontend. Fitur-fitur seperti penyimpanan request, pengelolaan koleksi, inspeksi detail request dan response, serta kemampuan untuk membuat otomatisasi pengujian dengan skrip, sangat membantu dalam pengujian API. Fitur-fitur ini juga akan berguna untuk pengembangan proyek perangkat lunak di masa depan, terutama dalam memastikan API tetap berfungsi dengan baik seiring perkembangan proyek.
+
 #### Reflection Publisher-3
+> Observer Pattern has two variations: Push model (publisher pushes data to subscribers) and Pull model (subscribers pull data from publisher). In this tutorial case, which variation of Observer Pattern that we use?
+
+Dalam tutorial ini, kita menggunakan *Push Model* dari Observer Pattern. Pada model ini, *publisher* secara aktif mendorong (*push*) data berupa notifikasi ke semua *subscriber* setelah terjadi perubahan seperti pembuatan, promosi, atau penghapusan produk. Data tersebut dikirim melalui HTTP POST request ke URL milik *subscriber*.
+
+> What are the advantages and disadvantages of using the other variation of Observer Pattern for this tutorial case? (example: if you answer Q1 with Push, then imagine if we used Pull)
+
+Jika kita menggunakan *Pull Model*, *subscriber* yang akan secara aktif menarik (*pull*) data dari *publisher*.  
+**Keuntungan dari Pull Model:**  
+- *Subscribers* bisa lebih fleksibel karena hanya menarik data ketika mereka membutuhkannya. Hal ini bisa mengurangi beban *publisher* karena tidak perlu terus-menerus mendorong notifikasi.  
+**Kerugian dari Pull Model:**  
+- Dapat menyebabkan latensi tinggi karena *subscriber* perlu terus memeriksa perubahan di *publisher* (polling). Hal ini juga tidak efisien untuk *real-time* notifikasi, di mana informasi terbaru sebaiknya dikirim segera.
+
+> Explain what will happen to the program if we decide to not use multi-threading in the notification process.
+
+Tanpa *multi-threading*, proses notifikasi akan berjalan secara sinkron dan *blocking*, yang berarti setiap notifikasi akan dikirim satu per satu secara berurutan. Hal ini dapat memperlambat kinerja aplikasi, terutama jika jumlah *subscriber* banyak. Dengan menggunakan *multi-threading*, kita dapat mengirim notifikasi secara paralel, yang meningkatkan efisiensi dan memungkinkan aplikasi menangani lebih banyak *subscriber* dengan lebih cepat. Tanpa ini, proses pengiriman notifikasi bisa menyebabkan aplikasi menjadi lambat dan tidak responsif.  
