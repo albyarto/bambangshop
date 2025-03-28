@@ -46,22 +46,22 @@ You can install Postman via this website: https://www.postman.com/downloads/
     (You might want to use `cargo check` if you only need to verify your work without running the app.)
 
 ## Mandatory Checklists (Publisher)
--   [ ] Clone https://gitlab.com/ichlaffterlalu/bambangshop to a new repository.
+-   [x] Clone https://gitlab.com/ichlaffterlalu/bambangshop to a new repository.
 -   **STAGE 1: Implement models and repositories**
-    -   [ ] Commit: `Create Subscriber model struct.`
-    -   [ ] Commit: `Create Notification model struct.`
-    -   [ ] Commit: `Create Subscriber database and Subscriber repository struct skeleton.`
-    -   [ ] Commit: `Implement add function in Subscriber repository.`
-    -   [ ] Commit: `Implement list_all function in Subscriber repository.`
-    -   [ ] Commit: `Implement delete function in Subscriber repository.`
-    -   [ ] Write answers of your learning module's "Reflection Publisher-1" questions in this README.
+    -   [x] Commit: `Create Subscriber model struct.`
+    -   [x] Commit: `Create Notification model struct.`
+    -   [x] Commit: `Create Subscriber database and Subscriber repository struct skeleton.`
+    -   [x] Commit: `Implement add function in Subscriber repository.`
+    -   [x] Commit: `Implement list_all function in Subscriber repository.`
+    -   [x] Commit: `Implement delete function in Subscriber repository.`
+    -   [x] Write answers of your learning module's "Reflection Publisher-1" questions in this README.
 -   **STAGE 2: Implement services and controllers**
-    -   [ ] Commit: `Create Notification service struct skeleton.`
-    -   [ ] Commit: `Implement subscribe function in Notification service.`
-    -   [ ] Commit: `Implement subscribe function in Notification controller.`
-    -   [ ] Commit: `Implement unsubscribe function in Notification service.`
-    -   [ ] Commit: `Implement unsubscribe function in Notification controller.`
-    -   [ ] Write answers of your learning module's "Reflection Publisher-2" questions in this README.
+    -   [x] Commit: `Create Notification service struct skeleton.`
+    -   [x] Commit: `Implement subscribe function in Notification service.`
+    -   [x] Commit: `Implement subscribe function in Notification controller.`
+    -   [x] Commit: `Implement unsubscribe function in Notification service.`
+    -   [x] Commit: `Implement unsubscribe function in Notification controller.`
+    -   [x] Write answers of your learning module's "Reflection Publisher-2" questions in this README.
 -   **STAGE 3: Implement notification mechanism**
     -   [ ] Commit: `Implement update method in Subscriber model to send notification HTTP requests.`
     -   [ ] Commit: `Implement notify function in Notification service to notify each Subscriber.`
@@ -88,5 +88,15 @@ Penggunaan `DashMap` jauh lebih disarankan dibandingkan `Vec` untuk mengelola da
 Meskipun Singleton Pattern bisa dipertimbangkan, penggunaan `DashMap` tetap menjadi pilihan terbaik dalam konteks pemrograman Rust. `DashMap` menyediakan mekanisme concurrent access yang sudah terintegrasi, menghindari kebutuhan implementasi mekanisme sinkronisasi manual yang rumit. Aturan kepemilikan dan peminjaman Rust sudah memberikan jaminan keamanan thread yang kuat, namun `DashMap` menambahkan lapisan perlindungan ekstra. Implementasi Singleton manual akan memerlukan penanganan sinkronisasi yang kompleks, sementara `DashMap` menawarkan solusi yang lebih idiomatis, aman, dan berperforma tinggi untuk menyimpan dan mengelola kumpulan subscriber dalam concurrency.
 
 #### Reflection Publisher-2
+> In the Model-View Controller (MVC) compound pattern, there is no “Service” and “Repository”. Model in MVC covers both data storage and business logic. Explain based on your understanding of design principles, why we need to separate “Service” and “Repository” from a Model?
 
+Dalam pola Model-View-Controller (MVC), pemisahan antara "Service" dan "Repository" bertujuan untuk menerapkan prinsip *Separation of Concerns*. Dengan memisahkan tugas, Model hanya bertanggung jawab atas representasi data, Service mengelola logika bisnis, dan Repository menangani interaksi dengan database. Hal ini membuat kode menjadi lebih modular, menjaga *Single Resposibility Principle*, mudah di-*maintain* serta di-*test*. Jika semua tanggung jawab diletakkan pada Model, kode akan menjadi terlalu kompleks, sulit dipahami, dan berisiko menyebabkan dependency yang tinggi antar bagian kode.
+   
+> What happens if we only use the Model? Explain your imagination on how the interactions between each model (Program, Subscriber, Notification) affect the code complexity for each model?
+
+Jika kita hanya menggunakan Model tanpa memisahkan Service dan Repository, semua logika bisnis dan operasi data akan bercampur dalam satu bagian kode. Hal ini akan membuat Model menjadi terlalu besar (*God Object*) dan sulit dikelola. Interaksi antara model seperti Program, Subscriber, dan Notification juga akan saling terkait secara langsung, sehingga menambah kompleksitas kode, membuat debugging dan penyesuaian fitur menjadi lebih rumit, serta menurunkan fleksibilitas dalam development di masa depan.
+
+> Have you explored more about Postman? Tell us how this tool helps you to test your current work. You might want to also list which features in Postman you are interested in or feel like it is helpful to help your Group Project or any of your future software engineering projects.
+
+Menurut saya, Postman adalah alat yang sangat berguna untuk menguji REST API. Dalam proyek ini, Postman membantu saya memastikan fungsi subscription dan unsubscription berjalan dengan baik tanpa perlu membuat antarmuka frontend. Fitur-fitur seperti penyimpanan request, pengelolaan koleksi, inspeksi detail request dan response, serta kemampuan untuk membuat otomatisasi pengujian dengan skrip, sangat membantu dalam pengujian API. Fitur-fitur ini juga akan berguna untuk pengembangan proyek perangkat lunak di masa depan, terutama dalam memastikan API tetap berfungsi dengan baik seiring perkembangan proyek.
 #### Reflection Publisher-3
